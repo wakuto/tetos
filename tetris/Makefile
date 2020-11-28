@@ -9,6 +9,8 @@ boot:
 	nasm boot.s -o boot.bin -l boot.lst
 	nasm kernel.s -o kernel.bin -l kernel.lst
 	cat boot.bin kernel.bin > boot.img
+	gcc -c tasks/main.c
+	ld -s boot.img main.o
 
 run:
 	bochsdbg -q -f ../../env/bochsrc.bxrc -rc ../../env/cmd.init
